@@ -25,15 +25,12 @@ async function codia() {
 
   //create Account for Alice (same as  --suri //Alice)
   const alicePair = keyring.addFromUri("//Alice", { name: "Alice" });
-  //Initialise variable for address
-  let address;
 
   //Use subscribe to deploy code to address
   const unsub = await tx.signAndSend(alicePair, ({ contract, status }) => {
     if (status.isInBlock || status.isFinalized) {
-      address = contract.address.toString();
-      //Log Address
-      console.log(address);
+      // Log Address
+      console.log(contract.address.toString());
       unsub();
     }
   });
